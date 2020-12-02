@@ -4,11 +4,11 @@ block content
     div
         p
             b Id :
-            span= user.id
+            span= user? user.id :''
         p
             b Name :
-            span= user.name
+            span= user? user.name :""
         p
             b Phone :
-            span= user.phone
+            span= user? user.phone:""
     

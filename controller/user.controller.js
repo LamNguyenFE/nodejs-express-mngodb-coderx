@@ -34,25 +34,11 @@ module.exports.create = (req, res) => {
 module.exports.postCreate = (req, res) => {
     //save to array users
     console.log(req.body);
+    console.log(res.locals);
     //add id to req.body ( user )
     req.body.id = shortid.generate();
 
-    //array of errors
-    //libraris validate -> midleware
-    let errors = [];
-    if (!req.body.name) {
-        errors.push('Name is required.');
-    }
-    if (!req.body.phone) {
-        errors.push('Phone is required.');
-    }
-    if (errors.length) {
-        res.render('users/create', {
-            errors: errors,
-            values: req.body,
-        })
-        return
-    }
+
     db.get('users').push(req.body).write()
     //res.render('users/create')
 
