@@ -7,7 +7,7 @@
 // module.exports.b = 2;
 const db = require('../db')
 const shortid = require('shortid')
-
+const md5 = require('md5')
 module.exports.index = (req, res) => {
     res.render('users/index', {
         users: db.get('users').value()
@@ -37,7 +37,17 @@ module.exports.postCreate = (req, res) => {
     console.log(res.locals);
     //add id to req.body ( user )
     req.body.id = shortid.generate();
-
+    //avatar
+    // file
+    // destination: "./public/uploads/"
+    // encoding: "7bit"
+    // fieldname: "avatar"
+    // filename: "avatar-1606987495576"
+    // mimetype: "image/png"
+    // originalname: "img1.png"
+    // path: "public\uploads\avatar-1606987495576"
+    // size: 27350
+    req.body.avatar = 'uploads/' + req.file.filename
 
     db.get('users').push(req.body).write()
     //res.render('users/create')

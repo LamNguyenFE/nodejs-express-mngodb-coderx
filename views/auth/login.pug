@@ -1,0 +1,19 @@
+extends ../layouts/common.pug
+block content
+    h1 Users Login
+
+    if errors
+        each error in errors
+            .alert.alert-danger= error
+
+    form(action="/auth/login", method="POST")
+        form-group
+            label(for="email") Email
+            input.form-control(type="text", name = "email", value=values? values.email :'' )
+            small.form-text.text-muted Something
+        form-group
+            label(for="password") Password
+            input.form-control(type="password", name = "password", value=values? values.password :'')   
+            small.form-text.text-muted Something
+        form-group       
+            button.btn.btn-primary(type="submit") Login

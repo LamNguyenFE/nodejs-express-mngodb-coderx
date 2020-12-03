@@ -9,11 +9,14 @@ block content
   table.table
     tr
       th Name
+      th Image
       th Phone
       th Actions
     each user in users
       tr
         td= user.name
+        td
+          img.img-fluid(src= user.avatar)
         td= user.phone
         td
           a.btn.btn-light(href='/users/'+user.id) View
