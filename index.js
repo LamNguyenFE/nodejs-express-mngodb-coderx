@@ -10,18 +10,28 @@ const cookieParser = require('cookie-parser')
 const userRoute = require('./routes/user.route')
 const productRoute = require('./routes/product.route')
 const authRoute = require('./routes/auth.route')
+const cartRoute = require('./routes/cart.route')
 const authMiddleware = require('./middlewares/auth.middleware')
 const mongoose = require('mongoose');
-
+const sessionMiddleware = require('./middlewares/session.middleware')
 app.set('view engine', 'pug')
 app.set('views', './views')
 
 app.use(express.json()) // for parsing application/json
-app.use(cookieParser(process.env.SESSION_SECRET)) // for parsing application/json
+app.use(cookieParser(process.env.SESSION_SECRET))
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 //static file
 app.use(express.static('public'))
+//apply to all url 
+app.use(sessionMiddleware)
+// app.use(csurf({ cookie: true }))
+// setup route middlewares
 
+
+// app.use(function (req, res, next) {
+//     res.locals._csrf = req.csrfToken()
+//     next()
+// })
 
 app.get('/', (req, res) => {
     // res.send('Hello World!<a href="/users">User List </a>')
@@ -40,7 +50,9 @@ app.use('/users', authMiddleware.requireAuth, userRoute);
 app.use('/products', productRoute);
 app.use('/auth', authRoute);
 
+app.use('/cart', cartRoute);
 
+// app.use(csurf({ cookie: true }))
 
 //les 8 - express route - chia nho code folder route/user.route.js
 

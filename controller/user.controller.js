@@ -1,3 +1,4 @@
+var csrf = require('csurf');
 // module.exports = {
 //     a: 1,
 //     b: 2,
@@ -28,7 +29,10 @@ module.exports.search = function (req, res) {
 }
 
 module.exports.create = (req, res) => {
-    res.render('users/create')
+    // console.log(req.csrfToken())
+    res.render('users/create', {
+        csrfToken: req.csrfToken()
+    })
 }
 
 module.exports.postCreate = (req, res) => {
@@ -47,7 +51,9 @@ module.exports.postCreate = (req, res) => {
     // originalname: "img1.png"
     // path: "public\uploads\avatar-1606987495576"
     // size: 27350
-    req.body.avatar = 'uploads/' + req.file.filename
+    if (req.file) {
+        req.body.avatar = 'uploads/' + req.file.filename
+    }
 
     db.get('users').push(req.body).write()
     //res.render('users/create')

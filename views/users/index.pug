@@ -16,7 +16,7 @@ block content
       tr
         td= user.name
         td
-          img.img-fluid(src= '/'+user.avatar)
+          img.img-fluid(src= '/'+user.avatar&&user.avatar)
         td= user.phone
         td
           a.btn.btn-light(href='/users/'+user.id) View

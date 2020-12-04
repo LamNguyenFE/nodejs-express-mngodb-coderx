@@ -15,22 +15,23 @@ block content
           .card-body
             h5.cart-title= product.name
             p.cart-text= product.description
-            a.btn.btn-primary(href="#") Add to cart
-  p          
-  p          
-  table.table
-    tr
-      th Name
-      th Image
-      th Description
-      th Price
-      th Action
-    each product in products
-      tr
-        td= product.name        
-        td
-          img.img-fluid(src= product.image)
-        td= product.description
-        td= '$'+product.price 
-        td
-          a.btn.btn-light(href='/products/'+product.id) View
+            p.cart-text= '$'+product.price 
+            a.btn.btn-primary(href="/cart/add/"+product.id) Add to cart
+  //- p          
+  //- p          
+  //- table.table
+  //-   tr
+  //-     th Name
+  //-     th Image
+  //-     th Description
+  //-     th Price
+  //-     th Action
+  //-   each product in products
+  //-     tr
+  //-       td= product.name        
+  //-       td
+  //-         img.img-fluid(src= product.image)
+  //-       td= product.description
+  //-       td= '$'+product.price 
+  //-       td
+  //-         a.btn.btn-light(href='/products/'+product.id) View

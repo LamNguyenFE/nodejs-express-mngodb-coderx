@@ -1,3 +1,5 @@
+const csrf = require('csurf');
+const csrfProtection = csrf({ cookie: true });
 const express = require('express');
 
 const router = express.Router();
@@ -113,9 +115,9 @@ router.get('/search', userController.search)
 
 //les 4 post 
 
-router.get('/create', userController.create)
-
-router.post('/create', upload.single('avatar'), validate.validate, userController.postCreate)
+router.get('/create', csrfProtection, userController.create)
+//vai, phai de middleware csrf sau file upload
+router.post('/create', upload.single('avatar'), validate.validate, csrfProtection, userController.postCreate)
 
 router.get('/edit/:id', userController.edit)
 
