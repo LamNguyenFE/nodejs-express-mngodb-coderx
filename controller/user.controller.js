@@ -68,3 +68,71 @@ module.exports.get = (req, res) => {
 
 
 }
+
+module.exports.edit = (req, res) => {
+    let id = req.params.id
+    // console.log(typeof (id)) //string -> parseInt -> int
+
+    let user = db.get('users').find({ id: id }).value()
+
+    res.render('users/edit', {
+        user: user
+    })
+}
+
+
+module.exports.postEdit = (req, res) => {
+    //save to array users
+    console.log('params id- ', req.params.id)
+    console.log('body-', req.body)
+    console.log('file-', req.file)
+
+
+    if (!req.file) {
+        db.get('users').find({ id: req.params.id }).assign({
+            name: req.body.name,
+            phone: req.body.phone
+        }).write()
+    }
+    else {
+        db.get('users').find({ id: req.params.id }).assign({
+            name: req.body.name,
+            phone: req.body.phone,
+            avatar: 'uploads/' + req.file.filename
+        }).write()
+    }
+    res.redirect('/users')
+
+    // console.log(res.locals);
+    //avatar
+    // file
+    // destination: "./public/uploads/"
+    // encoding: "7bit"
+    // fieldname: "avatar"
+    // filename: "avatar-1606987495576"
+    // mimetype: "image/png"
+    // originalname: "img1.png"
+    // path: "public\uploads\avatar-1606987495576"
+    // size: 27350
+
+}
+
+//delete
+module.exports.delete = (req, res) => {
+    let id = req.params.id
+    //don't delete admin :D
+    if (id === 'F3kAnldw1') {
+        res.redirect('/users')
+        return
+    }
+    // console.log(typeof (id)) //string -> parseInt -> int
+
+    let user = db.get('users').find({ id: id }).value()
+    if (user) {
+        db.get('users')
+            .remove({ id: id })
+            .write()
+    }
+
+    res.redirect('/users')
+}

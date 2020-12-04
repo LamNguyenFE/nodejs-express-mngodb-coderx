@@ -117,6 +117,12 @@ router.get('/create', userController.create)
 
 router.post('/create', upload.single('avatar'), validate.validate, userController.postCreate)
 
+router.get('/edit/:id', userController.edit)
+
+router.post('/edit/:id', upload.single('avatar'), validate.validate, userController.postEdit)
+
+router.get('/delete/:id', userController.delete)
+
 //les 6 - low db
 
 // les 7 - view user - shortid - route params ( string ) parseInt
