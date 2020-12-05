@@ -91,11 +91,56 @@ module.exports.indexPromise = function (req, res) {
 }
 
 //use async await
-module.exports.index = async function (req, res) {
+module.exports.indexOld = async function (req, res) {
     //save a callback
     let products = await Product.find()
 
     res.render('products/index', {
         products: products
+    })
+}
+
+const getPagination = (page, size) => {
+    const limit = size ? +size : 3;
+    const offset = (page - 1) ? (page - 1) * limit : 0;
+
+    return { limit, offset };
+};
+
+//use async await +paginate
+module.exports.index = async function (req, res) {
+
+    //get query params
+
+    const page = req.query.page || 1
+    const size = req.query.size || 8
+
+
+    const { limit, offset } = getPagination(page, size);
+
+
+    //save a callback
+    let data = await Product.paginate({}, { offset, limit })
+
+
+    // docs: (8) [model, model, model, model, model, model, model, model]
+    // hasNextPage: true
+    // hasPrevPage: true
+    // limit: 8
+    // nextPage: 3
+    // offset: 8
+    // page: 2
+    // pagingCounter: 9
+    // prevPage: 1
+    // totalDocs: 36
+    // totalPages: 5
+    res.render('products/index', {
+        products: data.docs,
+        totalItems: data.totalDocs,
+        totalPages: data.totalPages,
+        currentPage: data.page - 1,
+        data: data
+
+
     })
 }

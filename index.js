@@ -9,7 +9,9 @@ const port = 3000
 const cookieParser = require('cookie-parser')
 
 const userRoute = require('./routes/user.route')
+
 const productRoute = require('./routes/product.route')
+
 const authRoute = require('./routes/auth.route')
 const cartRoute = require('./routes/cart.route')
 

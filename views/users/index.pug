@@ -1,6 +1,14 @@
 extends ../layouts/common.pug
 block content
   h1 Users
+  if errors
+    each error in errors
+      .alert.alert-danger= error
+            
+  if messages
+    each message in messages
+      .alert.alert-info= message
+
   a.btn.btn-primary(href="/users/create") New Users
   p
   form.d-flex(action="/users/search/", method="GET")
@@ -9,14 +17,16 @@ block content
   table.table
     tr
       th Name
+      th Email
       th Image
       th Phone
       th Actions
     each user in users
       tr
         td= user.name
+        td= user.email
         td
-          img.img-fluid(src= '/'+user.avatar&&user.avatar)
+          img.img-fluid(src= user.avatar&&('/' + user.avatar))
         td= user.phone
         td
           a.btn.btn-light(href='/users/'+user.id) View

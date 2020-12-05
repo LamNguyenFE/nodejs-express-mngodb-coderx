@@ -1,6 +1,9 @@
 extends ../layouts/common.pug
 block content
     h1 View User
+    if errors
+        each error in errors
+            .alert.alert-danger= error
     div
         p
             b Id :
@@ -9,11 +12,14 @@ block content
             b Name :
             span= user? user.name :""
         p
+            b Email :
+            span= user? user.email :""
+        p
             b Phone :
             span= user? user.phone:""
         p
             b Avatar :
             span= user? user.avatar:""
             
-        img.img-fluid(src= '/'+user.avatar)
+        img.img-fluid(src= user.avatar&&('/' + user.avatar))
     

@@ -13,6 +13,14 @@ block content
             input.form-control(type="text", name = "name", value=values? values.name :'' )
             small.form-text.text-muted Type your name
         form-group
+            label(for="email") Email
+            input.form-control(type="email", name = "email", value=values? values.email :'' )
+            small.form-text.text-muted Type your email
+        form-group
+            label(for="password") password
+            input.form-control(type="password", name = "password", value=values? values.password :'' )
+            small.form-text.text-muted Type your password
+        form-group
             label(for="phone") Phone
             input.form-control(type="text", name = "phone", value=values? values.phone :'')   
             small.form-text.text-muted Something
