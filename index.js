@@ -29,7 +29,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 mongoose.connect(
-    process.env.MONGODB_URL || "mongodb+srv://admin:MjgkMJ7LvLNN8RZ2@cluster0.vaqua.mongodb.net/nodejs-express-mngodb-coderx?retryWrites=true&w=majority",
+    process.env.MONGODB_URL || "",
     {
         useNewUrlParser: true,
         useCreateIndex: true,
@@ -49,7 +49,7 @@ app.set('views', './views')
 
 app.use(express.json()) // for parsing application/json
 
-app.use(cookieParser(process.env.SESSION_SECRET || 'the_secret_text')) //siged cookie
+app.use(cookieParser(process.env.SESSION_SECRET || '')) //siged cookie
 
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 //static file
