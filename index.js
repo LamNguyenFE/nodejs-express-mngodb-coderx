@@ -49,7 +49,7 @@ app.set('views', './views')
 
 app.use(express.json()) // for parsing application/json
 
-app.use(cookieParser(process.env.SESSION_SECRET)) //siged cookie
+app.use(cookieParser(process.env.SESSION_SECRET || 'the_secret_text')) //siged cookie
 
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 //static file
