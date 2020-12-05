@@ -25,3 +25,6 @@ app.use(fileUpload({
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(csurf({ cookie: true }));
+
+less 29
+// "dev": "nodemon --inspect index.js",
