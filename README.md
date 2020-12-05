@@ -14,7 +14,10 @@ For Login
 user : admin@coderx.com 
 pass : 1234
 
-CURD mongoose
+CURD mongoose users
+Pagination products
+
+https://nodejs-express-mongodb-coderx.herokuapp.com/products?page=2&size=8
 
 
 
