@@ -19,7 +19,7 @@ block content
             label(for="avatar") Avatar
             input.form-control(type="file", name = "avatar", value=values? values.avatar :'')   
             small.form-text.text-muted Choose you avatar
-            img.img-fluid(src= '/'+user.avatar&&user.avatar)
+            img.img-fluid(src= user.avatar&&('/' + user.avatar))
         p
         form-group       
             button.btn.btn-primary(type="submit") Edit

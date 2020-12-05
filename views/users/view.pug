@@ -15,5 +15,5 @@ block content
             b Avatar :
             span= user? user.avatar:""
             
-        img.img-fluid(src= '/'+user.avatar)
+        img.img-fluid(src= user.avatar&&('/' + user.avatar))
     
