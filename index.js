@@ -5,7 +5,7 @@ require('dotenv').config()
 const express = require('express')
 const app = express()
 const cors = require("cors");
-const port = 3000
+const port = process.env.PORT || 3000
 const cookieParser = require('cookie-parser')
 
 const userRoute = require('./routes/user.route')
@@ -29,7 +29,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 mongoose.connect(
-    process.env.MONGODB_URL || "link-to-database",
+    process.env.MONGODB_URL || "mongodb+srv://admin:MjgkMJ7LvLNN8RZ2@cluster0.vaqua.mongodb.net/nodejs-express-mngodb-coderx?retryWrites=true&w=majority",
     {
         useNewUrlParser: true,
         useCreateIndex: true,
