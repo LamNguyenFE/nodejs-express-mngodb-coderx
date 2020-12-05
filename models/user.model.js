@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
 })
 
 //mOdel
-const User = mongoose.model('User', userSchema);
+//tham so thu 3 la colections name 
+const User = mongoose.model('User', userSchema, 'users');
 
 module.exports = User

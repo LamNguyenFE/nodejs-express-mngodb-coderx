@@ -1,7 +1,7 @@
 const db = require('../db')
-
+const Product = require('../models/product.model')
 //les 20 pagination
-module.exports.index = function (req, res) {
+module.exports.indexLowdb = function (req, res) {
     //methoad 1 : slice array
 
     // /products?page = 2
@@ -40,7 +40,7 @@ module.exports.index = function (req, res) {
 }
 
 //les 20 pagination
-module.exports.index2 = function (req, res) {
+module.exports.index2Lowdb = function (req, res) {
     //methoad 1 : slice array
 
     // /products?page = 2
@@ -78,5 +78,24 @@ module.exports.index2 = function (req, res) {
     //then take perPage items
     res.render('products/index', {
         products: db.get('products').drop((page - 1) * perPage).take(perPage).value()
+    })
+}
+
+module.exports.indexPromise = function (req, res) {
+    //2way callback or return promise
+    Product.find().then(function (products) {
+        res.render('products/index', {
+            products: products
+        })
+    })
+}
+
+//use async await
+module.exports.index = async function (req, res) {
+    //save a callback
+    let products = await Product.find()
+
+    res.render('products/index', {
+        products: products
     })
 }

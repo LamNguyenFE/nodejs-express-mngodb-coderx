@@ -4,6 +4,7 @@ require('dotenv').config()
 // console.log(process.env)
 const express = require('express')
 const app = express()
+const cors = require("cors");
 const port = 3000
 const cookieParser = require('cookie-parser')
 
@@ -11,14 +12,43 @@ const userRoute = require('./routes/user.route')
 const productRoute = require('./routes/product.route')
 const authRoute = require('./routes/auth.route')
 const cartRoute = require('./routes/cart.route')
+
+const apiProductRoute = require('./api/routes/product.route')
+
 const authMiddleware = require('./middlewares/auth.middleware')
+//object modeling for nodejs
 const mongoose = require('mongoose');
 const sessionMiddleware = require('./middlewares/session.middleware')
+
+var corsOptions = {
+    origin: "http://localhost:3000"
+};
+
+app.use(cors(corsOptions));
+
+mongoose.connect(
+    process.env.MONGODB_URL || "link-to-database",
+    {
+        useNewUrlParser: true,
+        useCreateIndex: true,
+        useUnifiedTopology: true
+    }
+).then(() => {
+    console.log("Connected to the database!");
+})
+    .catch(err => {
+        console.log("Cannot connect to the database!", err);
+        process.exit();
+    });
+
+
 app.set('view engine', 'pug')
 app.set('views', './views')
 
 app.use(express.json()) // for parsing application/json
-app.use(cookieParser(process.env.SESSION_SECRET))
+
+app.use(cookieParser(process.env.SESSION_SECRET)) //siged cookie
+
 app.use(express.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 //static file
 app.use(express.static('public'))
@@ -52,6 +82,7 @@ app.use('/auth', authRoute);
 
 app.use('/cart', cartRoute);
 
+app.use('/api/products', apiProductRoute)
 // app.use(csurf({ cookie: true }))
 
 //les 8 - express route - chia nho code folder route/user.route.js
