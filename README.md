@@ -19,6 +19,10 @@ Pagination products
 
 https://nodejs-express-mongodb-coderx.herokuapp.com/products?page=2&size=8
 
+API
+Seed
+Get all products
+https://nodejs-express-mongodb-coderx.herokuapp.com/api/products
 
 
 Less 22 Session
